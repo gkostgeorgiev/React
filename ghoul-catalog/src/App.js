@@ -9,12 +9,11 @@ class App extends Component {
 
     this.state = {
       ghouls: [],
+      searchField: '',
     };
-    console.log('constructor');
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then((users) => this.setState(() => {
@@ -25,21 +24,25 @@ class App extends Component {
   }
 
   render() {
-    console.log('render');
+    const result = this.state.ghouls.filter((ghoul) => {
+      return ghoul.name.toLowerCase().includes(this.state.searchField);
+    });
+
     return (
       <div className="App">
-        <input className='search-box' type='search' placeholder='Search ghouls' onChange={(event) => {
-          const searchString = event.target.value.toLowerCase();
-          const result = this.state.ghouls.filter((ghoul) => {
-            return ghoul.name.toLowerCase().includes(searchString);
-          });
+        <input
+          className='search-box'
+          type='search'
+          placeholder='Search ghouls'
+          onChange={(event) => {
+            const searchField = event.target.value.toLowerCase();
 
-          this.setState(() => {
-            return { ghouls: result };
-          });
-        }} />
+            this.setState(() => {
+              return { searchField };
+            });
+          }} />
         {
-          this.state.ghouls.map((ghoul) => {
+          result.map((ghoul) => {
             return <div key={ghoul.id}><h1>{ghoul.name}</h1></div>;
           })
         }

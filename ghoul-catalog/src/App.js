@@ -1,6 +1,8 @@
 import { Component } from 'react';
 
 import logo from './logo.svg';
+import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
 import './App.css';
 
 class App extends Component {
@@ -11,7 +13,6 @@ class App extends Component {
       ghouls: [],
       searchField: '',
     };
-    console.log('constructor');
   }
 
   componentDidMount() {
@@ -20,10 +21,8 @@ class App extends Component {
       .then(users => this.setState(() => {
         return { ghouls: users };
       },
-        // console.log(this.state)
       ))
-      .catch(err => console.log(err));
-    console.log('componentDidMount');
+      .catch(err => { });
   }
 
   onSearchChange = (event) => {
@@ -35,27 +34,21 @@ class App extends Component {
   };
 
   render() {
-    console.log('render');
-
+    console.log('render from App.js');
     const { ghouls, searchField } = this.state;
     const { onSearchChange } = this;
-    
-    const result = ghouls.filter((ghoul) => {
+
+    const filteredGhouls = ghouls.filter((ghoul) => {
       return ghoul.name.toLowerCase().includes(searchField);
     });
 
     return (
       <div className="App">
-        <input
-          className='search-box'
-          type='search'
-          placeholder='Search ghouls'
-          onChange={onSearchChange} />
-        {
-          result.map((ghoul) => {
-            return <div key={ghoul.id}><h1>{ghoul.name}</h1></div>;
-          })
-        }
+        <SearchBox 
+        className='search-box'
+        onChangeHandler={onSearchChange} 
+        placeholder='Search ghouls' />
+        <CardList ghouls={filteredGhouls} />
       </div>
     );
   }

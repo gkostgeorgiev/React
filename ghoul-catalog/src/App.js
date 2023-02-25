@@ -11,21 +11,37 @@ class App extends Component {
       ghouls: [],
       searchField: '',
     };
+    console.log('constructor');
   }
 
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
-      .then((users) => this.setState(() => {
+      .then(users => this.setState(() => {
         return { ghouls: users };
       },
-        console.log(this.state)))
+        // console.log(this.state)
+      ))
       .catch(err => console.log(err));
+    console.log('componentDidMount');
   }
 
+  onSearchChange = (event) => {
+    const searchField = event.target.value.toLowerCase();
+
+    this.setState(() => {
+      return { searchField };
+    });
+  };
+
   render() {
-    const result = this.state.ghouls.filter((ghoul) => {
-      return ghoul.name.toLowerCase().includes(this.state.searchField);
+    console.log('render');
+
+    const { ghouls, searchField } = this.state;
+    const { onSearchChange } = this;
+    
+    const result = ghouls.filter((ghoul) => {
+      return ghoul.name.toLowerCase().includes(searchField);
     });
 
     return (
@@ -34,13 +50,7 @@ class App extends Component {
           className='search-box'
           type='search'
           placeholder='Search ghouls'
-          onChange={(event) => {
-            const searchField = event.target.value.toLowerCase();
-
-            this.setState(() => {
-              return { searchField };
-            });
-          }} />
+          onChange={onSearchChange} />
         {
           result.map((ghoul) => {
             return <div key={ghoul.id}><h1>{ghoul.name}</h1></div>;

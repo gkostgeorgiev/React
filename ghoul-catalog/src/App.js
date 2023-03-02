@@ -1,6 +1,6 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 import { useState, useEffect } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
 import './App.css';
@@ -22,7 +22,6 @@ const App = () => {
     });
 
     setFilteredGhouls(newFilteredGhouls);
-    console.log('effect is firing');
   }, [ghouls, searchField]);
 
   const onSearchChange = (event) => {

@@ -1,4 +1,4 @@
-// import { Component } from 'react';
+import React, { Component }  from 'react';
 import { useState, useEffect } from 'react';
 // import logo from './logo.svg';
 import CardList from './components/card-list/card-list.component';
@@ -9,6 +9,8 @@ const App = () => {
   const [searchField, setSearchField] = useState('');
   const [ghouls, setGhouls] = useState([]);
   const [filteredGhouls, setFilteredGhouls] = useState(ghouls);
+
+  console.log('rendered');
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')

@@ -1,40 +1,37 @@
-const App = () => {
+import './categories.styles.scss';
+import Directory from './components/directory/directory.component';
 
+const App = () => {
   const categories = [
     {
-      id: 1,
-      title: 'Hats',
+        id: 1,
+        title: 'Headwear',
+        imageUrl: 'https://i.ibb.co/n0G5ct2/pexels-pixabay-35185.jpg',
     },
     {
-      id: 2,
-      title: 'Jackets',
+        id: 2,
+        title: 'Coats',
+        imageUrl: 'https://i.ibb.co/jhp22Gj/pexels-andrea-piacquadio-840916.jpg',
     },
     {
-      id: 3,
-      title: 'Sneakers',
+        id: 3,
+        title: 'Shoes',
+        imageUrl: 'https://i.ibb.co/FJ7fS7T/pexels-dominika-roseclay-1021816.jpg',
     },
     {
-      id: 4,
-      title: 'Womens',
+        id: 4,
+        title: 'Ladies',
+        imageUrl: 'https://i.ibb.co/dpLV2zB/pexels-radu-florin-2646841.jpg',
     },
     {
-      id: 5,
-      title: 'Mens',
+        id: 5,
+        title: 'Gentlemen',
+        imageUrl: 'https://i.ibb.co/3SBX8Gj/pexels-jordan-bergendahl-10402661.jpg',
     },
-  ];
+];
 
   return (
-    <div className="categories-container">
-      {categories.map(({ title }) => (
-        <div className="category-container">
-          <div className="background-image"></div>
-          <div className="category-body-container">
-            <h2>{title}</h2>
-            <p>Shop Now</p>
-          </div>
-        </div>
-      ))}
-    </div>
+    <Directory categories={categories} />
   );
 };
 
